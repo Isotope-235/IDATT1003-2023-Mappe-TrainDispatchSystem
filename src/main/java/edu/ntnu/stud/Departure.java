@@ -8,6 +8,8 @@ import java.util.Optional;
 
 /**
  * This class stores information about a departure. It is responsible for validating its fields.
+ * Time of departure, line, and destination are required (and immutable) fields.
+ * Track and delay are optional, and may be changed.
  *
  * @author Jonathan Jensen
  */

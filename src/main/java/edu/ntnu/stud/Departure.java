@@ -80,9 +80,7 @@ public class Departure {
    * @throws IllegalArgumentException If the given track number is negative
    */
   public void setTrack(int track) {
-    if (track < 1) {
-      throw new IllegalArgumentException("Track number must be positive");
-    }
+    Parameter.positive(track, "Track number"); // propagate exception
     this.track = track;
   }
 

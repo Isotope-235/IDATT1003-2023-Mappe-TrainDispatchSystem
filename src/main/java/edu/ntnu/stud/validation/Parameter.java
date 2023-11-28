@@ -6,4 +6,10 @@ public class Parameter {
       throw new IllegalArgumentException(name + " cannot be blank");
     }
   }
+
+  public static void positive(int param, String name) {
+    if (param < 1) {
+      throw new IllegalArgumentException(name + " must be positive");
+    }
+  }
 }

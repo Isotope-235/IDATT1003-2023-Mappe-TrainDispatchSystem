@@ -1,7 +1,6 @@
 package edu.ntnu.stud;
 
 import edu.ntnu.stud.validation.Parameter;
-
 import java.time.LocalTime;
 import java.util.Optional;
 
@@ -41,6 +40,8 @@ public class Departure {
   }
 
   /**
+   * Gets the time of departure, not including delays.
+   *
    * @return Time of departure, not including delays
    */
   public LocalTime getTime() {
@@ -48,6 +49,8 @@ public class Departure {
   }
 
   /**
+   * Gets the time of departure, including delays.
+   *
    * @return Time of departure, including delays
    */
   public LocalTime getRealTime() {
@@ -55,6 +58,8 @@ public class Departure {
   }
 
   /**
+   * Gets the line for the departure.
+   *
    * @return The line for the departure
    */
   public String getLine() {
@@ -62,6 +67,8 @@ public class Departure {
   }
 
   /**
+   * Gets the destination for the departure.
+   *
    * @return The destination for the departure
    */
   public String getDestination() {
@@ -69,7 +76,10 @@ public class Departure {
   }
 
   /**
-   * @return An optional containing the track number, or an empty optional if no track has been assigned
+   * Gets the track number for the departure, if one has been assigned.
+   *
+   * @return An optional containing the track number, or an empty optional
+   *     if no track has been assigned
    */
   public Optional<Integer> getTrack() {
     return track == -1 ? Optional.empty() : Optional.of(track);
@@ -87,6 +97,8 @@ public class Departure {
   }
 
   /**
+   * Gets the delay for the departure.
+   *
    * @return The delay for the departure
    */
   public LocalTime getDelay() {

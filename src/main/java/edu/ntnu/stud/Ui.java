@@ -1,12 +1,12 @@
 package edu.ntnu.stud;
 
+import java.util.Scanner;
+
 public final class Ui {
+  private final Scanner scanner;
 
-  public static void init() {
-
+  public Ui() {
+    this.scanner = new Scanner(System.in);
   }
 
-  public static void start() {
-
-  }
 }

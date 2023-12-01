@@ -2,6 +2,7 @@ package edu.ntnu.stud;
 
 import edu.ntnu.stud.validation.Parameter;
 import java.time.LocalTime;
+import java.util.Objects;
 import java.util.Optional;
 
 
@@ -78,7 +79,7 @@ public class Departure {
   /**
    * Gets the track number for the departure, if one has been assigned.
    *
-   * @return An optional containing the track number, or an empty optional
+   * @return An {@link Optional} containing the track number, or an empty {@link Optional}
    *     if no track has been assigned
    */
   public Optional<Integer> getTrack() {
@@ -112,5 +113,26 @@ public class Departure {
    */
   public void setDelay(LocalTime delay) {
     this.delay = delay;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    Departure departure = (Departure) o;
+    return track == departure.track
+            && Objects.equals(time, departure.time)
+            && Objects.equals(line, departure.line)
+            && Objects.equals(destination, departure.destination)
+            && Objects.equals(delay, departure.delay);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(time, line, destination, track, delay);
   }
 }

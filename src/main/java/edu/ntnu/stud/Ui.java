@@ -1,5 +1,7 @@
 package edu.ntnu.stud;
 
+import edu.ntnu.stud.commands.Add;
+
 import java.util.Scanner;
 
 public final class Ui {
@@ -9,4 +11,11 @@ public final class Ui {
     this.scanner = new Scanner(System.in);
   }
 
+  public Command promptCommand(Command[] commands) {
+    return new Add();
+  }
+
+  public void printExitMessage() {
+
+  }
 }

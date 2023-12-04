@@ -12,10 +12,26 @@ public final class Ui {
   }
 
   public Command promptCommand(Command[] commands) {
-    return new Add();
+    while (true) {
+      System.out.println("Enter any of the following commands:");
+      for (var command : commands) {
+        System.out.println(command.identifier() + ": " + command.description());
+      }
+      var prompt = scanner.nextLine();
+      for (var command : commands) {
+        if (command.identifier().equals(prompt)) {
+          return command;
+        }
+      }
+      System.out.println("Invalid command: " + prompt);
+    }
   }
 
   public void printExitMessage() {
+    System.out.println("Exiting...");
+  }
 
+  public void printWelcomeMessage() {
+    System.out.println("Welcome to the train dispatch system.");
   }
 }

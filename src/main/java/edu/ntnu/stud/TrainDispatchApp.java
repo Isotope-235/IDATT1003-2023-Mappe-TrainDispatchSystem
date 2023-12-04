@@ -1,5 +1,7 @@
 package edu.ntnu.stud;
 
+import edu.ntnu.stud.commands.Add;
+
 import java.util.ArrayList;
 
 /**
@@ -22,8 +24,10 @@ public class TrainDispatchApp {
     this.commandHistory = new ArrayList<>();
 
     this.commands = new Command[] {
-
+      new Add()
     };
+
+    this.running = false;
   }
 
   private static TrainDispatchApp init() {
@@ -31,7 +35,8 @@ public class TrainDispatchApp {
   }
 
   private void run() {
-    var running = true;
+    this.running = true;
+    userInterface.printWelcomeMessage();
     while (running) {
       var command = userInterface.promptCommand(commands);
       var maybeLog = command.execute(this);

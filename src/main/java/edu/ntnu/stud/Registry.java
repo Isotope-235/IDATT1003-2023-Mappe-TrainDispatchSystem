@@ -1,10 +1,7 @@
 package edu.ntnu.stud;
 
 import java.time.LocalTime;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 /**
@@ -28,7 +25,7 @@ public class Registry {
 
   /**
    * Constructs a new, empty registry.
-   * If you want to populate the registry with departures, call {@link #add(int, Departure)}
+   * If you want to populate the registry with departures, call {@link #addWithNumber(int, Departure)}
    * after constructing the registry.
    */
   public Registry() {
@@ -36,14 +33,24 @@ public class Registry {
   }
 
   /**
+   * Removes the departure with the given departure number from the registry.
+   *
+   * @param id The departure number of the departure to be removed
+   * @return The departure which was removed
+   */
+  public Optional<Departure> remove(int id) {
+    return Optional.ofNullable(this.departures.remove(id));
+  }
+
+  /**
    * A record which represents an entry in the departure registry.
    * It consists of a departure and its departure number, which are available
    * through their associated methods.
    *
-   * @param id The departure number
+   * @param number The departure number
    * @param departure The departure itself
    */
-  public record Entry(int id, Departure departure) {
+  public record Entry(int number, Departure departure) {
     public static Entry fromMapPair(Map.Entry<Integer, Departure> entry) {
       return new Entry(entry.getKey(), entry.getValue());
     }
@@ -52,16 +59,40 @@ public class Registry {
   /**
    * Adds a departure to the registry, with the given departure number.
    *
-   * @param id The number to be associated with the departure
+   * @param number The number to be associated with the departure
    * @param departure The departure to be added to the registry
    * @throws IllegalStateException If the given number is already
    *     associated with a departure in the registry
    */
-  public void add(int id, Departure departure) {
-    if (departures.containsKey(id)) {
-      throw new IllegalStateException("Departure " + id + " already exists");
+  public void addWithNumber(int number, Departure departure) {
+    if (departures.containsKey(number)) {
+      throw new IllegalStateException("Departure " + number + " already exists");
     }
-    departures.put(id, departure);
+    departures.put(number, departure);
+  }
+
+  /**
+   * Adds a departure to the registry, generating a departure number automatically.
+   *
+   * @return The departure number associated with the added departure
+   * @param departure The departure to be added to the registry
+   */
+  public int add(Departure departure) {
+    var number = departures.keySet().stream()
+            .max(Comparator.comparingInt(key -> key))
+            .map(num -> num + 1)
+            .orElse(1); // start at 1 if there are no departures
+    departures.put(number, departure);
+    return number;
+  }
+
+  /**
+   * The set of all departure numbers currently in use.
+   *
+   * @return A set of all departure numbers currently in use
+   */
+  public Set<Integer> numbersInUse() {
+    return departures.keySet();
   }
 
   /**

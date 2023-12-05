@@ -36,8 +36,8 @@ public class TrainDispatchApp {
   }
 
   private void run() {
-    registry.add(5, new Departure(LocalTime.of(12, 30), "F1", "Oslo"));
-    registry.add(2, new Departure(LocalTime.of(12, 35), "F2", "Trondheim"));
+    registry.add(new Departure(LocalTime.of(12, 30), "F1", "Oslo"));
+    registry.add(new Departure(LocalTime.of(12, 35), "F2", "Trondheim"));
     running = true;
     userInterface.printWelcomeMessage();
     while (running) {

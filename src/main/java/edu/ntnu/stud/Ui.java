@@ -3,10 +3,7 @@ package edu.ntnu.stud;
 import edu.ntnu.stud.commands.Add;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 public final class Ui {
@@ -109,6 +106,61 @@ public final class Ui {
     System.out.println("Welcome to the train dispatch system.");
   }
 
+  public LocalTime promptTime() {
+    while (true) {
+      System.out.println("Enter a time (format: 'HH:MM'):");
+      var time = scanner.nextLine();
+      try {
+        return LocalTime.parse(time);
+      } catch (Exception e) {
+        System.out.println("invalid time: '" + time + "'");
+      }
+    }
+  }
+
+  public Optional<Integer> promptDepartureNumber(Set<Integer> taken) {
+    var prompt = "Enter departure number (optional):";
+    var name = "departure number";
+
+    var given = promptOptionalInt(prompt, name);
+    if (given.isEmpty()) {
+      return given;
+    }
+    while (taken.contains(given.get())) {
+      System.out.println("Departure number already in use");
+      given = promptOptionalInt(prompt, name);
+    }
+    return given;
+  }
+
+  public String promptLine() {
+    return promptNonBlank("Enter a rail line:", "dine");
+  }
+
+  public String promptDestination() {
+    return promptNonBlank("Enter destination:", "destination");
+  }
+
+  public Optional<Integer> promptTrack() {
+    return promptOptionalInt("Enter track number (optional):", "track");
+  }
+
+  public Optional<Integer> promptOptionalInt(String prompt, String propertyName) {
+    while (true) {
+      System.out.println(prompt);
+      var input = scanner.nextLine();
+      if (input.isBlank()) {
+        return Optional.empty();
+      } else {
+        try {
+          return Optional.of(Integer.parseInt(input));
+        } catch (Exception e) {
+          System.out.println("invalid " + propertyName + ": '" + input + "'");
+        }
+      }
+    }
+  }
+
   private String promptNonBlank(String prompt, String propertyName) {
     while (true) {
       System.out.println(prompt);
@@ -117,41 +169,6 @@ public final class Ui {
         System.out.println(propertyName + " cannot be blank");
       } else {
         return input;
-      }
-    }
-  }
-
-  public LocalTime promptTime() {
-    while (true) {
-      System.out.println("Enter a time (format: 'HH:MM'):");
-      var time = scanner.nextLine();
-      try {
-        return LocalTime.parse(time);
-      } catch (Exception e) {
-        System.out.println("Invalid time: '" + time + "'");
-      }
-    }
-  }
-
-  public String promptLine() {
-    return promptNonBlank("Enter a rail line:", "Line");
-  }
-
-  public String promptDestination() {
-    return promptNonBlank("Enter destination:", "Destination");
-  }
-
-  public Optional<Integer> promptTrack() {
-    while (true) {
-      System.out.println("Enter a track (leave empty to defer choice):");
-      var track = scanner.nextLine();
-      if (track.isBlank()) {
-        return Optional.empty();
-      }
-      try {
-          return Optional.of(Integer.parseInt(track));
-      } catch (Exception e) {
-        System.out.println("Invalid track: '" + track + "'");
       }
     }
   }

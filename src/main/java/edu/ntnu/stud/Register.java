@@ -12,7 +12,7 @@ public class Register {
 
   public Optional<Departure> get(int id) {
     // TODO
-    // get departure by id
+    // get departure by number
     return Optional.of(new Departure(LocalTime.of(0, 0), "", ""));
   }
 

@@ -15,9 +15,9 @@ public final class Ui {
 
   public Command promptCommand(Command[] commands) {
     while (true) {
-      System.out.println("Enter any of the following commands:");
+      System.out.println("Enter any of the following commands:\n");
       for (var command : commands) {
-        System.out.println(command.identifier() + ": " + command.description());
+        System.out.println("\t'" + command.identifier() + "': " + command.description());
       }
       var prompt = scanner.nextLine();
       for (var command : commands) {
@@ -103,7 +103,7 @@ public final class Ui {
   }
 
   public void printWelcomeMessage() {
-    System.out.println("Welcome to the train dispatch system.");
+    System.out.println("\nWelcome to the train dispatch system.\n");
   }
 
   public LocalTime promptTime() {

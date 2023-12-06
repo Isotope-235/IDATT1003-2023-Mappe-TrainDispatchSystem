@@ -1,6 +1,7 @@
 package edu.ntnu.stud;
 
 import edu.ntnu.stud.commands.Add;
+import edu.ntnu.stud.commands.ListCommands;
 import edu.ntnu.stud.commands.ListDepartures;
 
 import java.time.LocalTime;
@@ -27,6 +28,7 @@ public class TrainDispatchApp {
 
     setCommandHistory(new ArrayList<>());
     setCommands(new Command[]{
+      new ListCommands(),
       new ListDepartures(),
       new Add()
     });
@@ -44,11 +46,14 @@ public class TrainDispatchApp {
     registry.add(new Departure(LocalTime.of(12, 35), "F2", "Trondheim"));
     running = true;
     userInterface.printWelcomeMessage();
+    userInterface.printCommands(commands);
     while (running) {
       var command = userInterface.promptCommand(commands);
       var maybeLog = command.execute(this);
-      maybeLog.ifPresent(commandHistory::add);
-      userInterface.printDepartureList(registry, clock);
+      maybeLog.ifPresent(log -> {
+        commandHistory.add(log);
+        userInterface.printDepartureList(registry, clock);
+      });
     }
     userInterface.printExitMessage();
   }

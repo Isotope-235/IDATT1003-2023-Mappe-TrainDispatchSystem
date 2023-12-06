@@ -14,6 +14,7 @@ public class TrainDispatchApp {
   private ArrayList<CommandLog> commandHistory;
   private Command[] commands;
   private boolean running;
+  private LocalTime clock;
 
   public static void main(String[] args) { // TODO
     TrainDispatchApp.init().run();
@@ -77,7 +78,7 @@ public class TrainDispatchApp {
     return commands;
   }
 
-  public void setCommands(Command[] commands) {
+  private void setCommands(Command[] commands) {
     this.commands = commands;
   }
 
@@ -87,5 +88,13 @@ public class TrainDispatchApp {
 
   public void setRunning(boolean running) {
     this.running = running;
+  }
+
+  public LocalTime getClock() {
+    return clock;
+  }
+
+  public void setClock(LocalTime clock) {
+    this.clock = clock;
   }
 }

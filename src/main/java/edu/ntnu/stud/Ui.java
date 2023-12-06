@@ -13,12 +13,15 @@ public final class Ui {
     this.scanner = new Scanner(System.in);
   }
 
+  public void printCommands(Command[] commands) {
+    System.out.println("Available commands:\n");
+    for (var command : commands) {
+      System.out.println("\t'" + command.identifier() + "': " + command.description());
+    }
+  }
+
   public Command promptCommand(Command[] commands) {
     while (true) {
-      System.out.println("Enter any of the following commands:\n");
-      for (var command : commands) {
-        System.out.println("\t'" + command.identifier() + "': " + command.description());
-      }
       var prompt = scanner.nextLine();
       for (var command : commands) {
         if (command.identifier().equals(prompt)) {

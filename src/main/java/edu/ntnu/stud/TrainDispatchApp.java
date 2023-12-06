@@ -1,6 +1,7 @@
 package edu.ntnu.stud;
 
 import edu.ntnu.stud.commands.Add;
+import edu.ntnu.stud.commands.ListDepartures;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -23,9 +24,10 @@ public class TrainDispatchApp {
   private TrainDispatchApp() {
     setRegistry(new Registry());
     setUserInterface(new Ui());
-    
+
     setCommandHistory(new ArrayList<>());
-    setCommands(new Command[] {
+    setCommands(new Command[]{
+      new ListDepartures(),
       new Add()
     });
 

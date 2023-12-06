@@ -21,15 +21,16 @@ public class TrainDispatchApp {
   }
 
   private TrainDispatchApp() {
-    this.registry = new Registry();
-    this.userInterface = new Ui();
-    this.commandHistory = new ArrayList<>();
-
-    this.commands = new Command[] {
+    setRegistry(new Registry());
+    setUserInterface(new Ui());
+    
+    setCommandHistory(new ArrayList<>());
+    setCommands(new Command[] {
       new Add()
-    };
+    });
 
-    this.running = false;
+    setRunning(false);
+    setClock(LocalTime.of(0, 0));
   }
 
   private static TrainDispatchApp init() {
@@ -45,7 +46,7 @@ public class TrainDispatchApp {
       var command = userInterface.promptCommand(commands);
       var maybeLog = command.execute(this);
       maybeLog.ifPresent(commandHistory::add);
-      userInterface.printDepartureList(registry);
+      userInterface.printDepartureList(registry, clock);
     }
     userInterface.printExitMessage();
   }

@@ -29,7 +29,7 @@ public final class Ui {
     }
   }
 
-  public void printDepartureList(Registry registry) {
+  public void printDepartureList(Registry registry, LocalTime time) {
     var departures = registry.byTime();
 
     var fields = new ArrayList<String[]>();
@@ -95,6 +95,7 @@ public final class Ui {
     // bottom row
     var bottomRow = topRow.toString().replace("┌", "└").replace("┐", "┘").replace("┬", "┴");
     table.append(bottomRow).append("\n");
+    System.out.println("\nCurrent time: " + time);
     System.out.println(table);
   }
 

@@ -19,6 +19,6 @@ public class ListDepartures implements Command {
 
   @Override
   public String description() {
-    return "List all departures entered in the registry";
+    return "List all departures currently entered in the registry";
   }
 }

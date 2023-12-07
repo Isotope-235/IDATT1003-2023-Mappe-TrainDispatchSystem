@@ -33,7 +33,7 @@ public final class Ui {
   }
 
   public void printDepartureList(Registry registry, LocalTime time) {
-    var departures = registry.byTime();
+    var departures = registry.afterOrAt(time);
 
     var fields = new ArrayList<String[]>();
     fields.add(new String[] {"Time", "Line", "Destination", "Track", "Delay"});

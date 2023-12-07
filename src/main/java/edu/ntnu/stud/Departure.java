@@ -36,7 +36,7 @@ public class Departure {
     this.line = line;
     this.destination = destination;
 
-    this.track = -1;
+    this.resetTrack();
     this.delay = LocalTime.of(0, 0);
   }
 
@@ -95,6 +95,13 @@ public class Departure {
   public void setTrack(int track) {
     Parameter.positive(track, "Track number"); // propagate exception
     this.track = track;
+  }
+
+  /**
+   * Resets the track number for the departure. I.e. removes the track number.
+   */
+  public void resetTrack() {
+      this.track = -1;
   }
 
   /**

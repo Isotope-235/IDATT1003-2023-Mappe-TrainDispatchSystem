@@ -142,7 +142,10 @@ public class Registry {
             (Map.Entry<Integer, Departure> entry) -> entry.getValue().getTime()
     ).thenComparing(entry -> entry.getValue().getDestination());
     var out = departureStream()
-            .filter(entry -> entry.getValue().getRealTime().isAfter(time.minusMinutes(1)))
+            .filter(entry -> {
+              var realTime = entry.getValue().getRealTime();
+              return realTime.isAfter(time) || realTime.equals(time);
+            })
             .sorted(comparison);
     return mapToEntries(out);
   }

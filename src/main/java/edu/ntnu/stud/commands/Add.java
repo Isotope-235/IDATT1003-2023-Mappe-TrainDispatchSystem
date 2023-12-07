@@ -9,7 +9,7 @@ public class Add implements Command {
   public Optional<CommandLog> execute(TrainDispatchApp app) {
     var registry = app.getRegistry();
     var ui = app.getUserInterface();
-    var number = ui.promptDepartureNumber(registry.numbersInUse());
+    var number = ui.promptOptionalDepartureNumber(registry.numbersInUse());
     var time = ui.promptTime();
     var line = ui.promptLine();
     var destination = ui.promptDestination();

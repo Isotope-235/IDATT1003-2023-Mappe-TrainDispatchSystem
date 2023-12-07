@@ -1,10 +1,7 @@
 package edu.ntnu.stud;
 
-import edu.ntnu.stud.commands.Add;
-
 import java.time.LocalTime;
 import java.util.*;
-import java.util.stream.Stream;
 
 public final class Ui {
   private final Scanner scanner;
@@ -122,7 +119,7 @@ public final class Ui {
     }
   }
 
-  public Optional<Integer> promptDepartureNumber(Set<Integer> taken) {
+  public Optional<Integer> promptOptionalDepartureNumber(Set<Integer> taken) {
     var prompt = "Enter departure number (optional):";
     var name = "departure number";
 
@@ -137,6 +134,21 @@ public final class Ui {
     return given;
   }
 
+  public int promptDepartureNumber(Set<Integer> departures) {
+    while (true) {
+      var given = promptOptionalInt("Enter departure number:", "departure number");
+      if (given.isPresent()) {
+        var number = given.get();
+        if (departures.contains(number)) {
+          return number;
+        }
+        System.out.println("Departure " + given.get() + " does not exist");
+        continue;
+      }
+      System.out.println("Departure number is required");
+    }
+  }
+
   public String promptLine() {
     return promptNonBlank("Enter a rail line:", "dine");
   }
@@ -146,7 +158,7 @@ public final class Ui {
   }
 
   public Optional<Integer> promptTrack() {
-    return promptOptionalInt("Enter track number (optional):", "track");
+    return promptOptionalInt("Enter track number (or leave blank):", "track");
   }
 
   public Optional<Integer> promptOptionalInt(String prompt, String propertyName) {

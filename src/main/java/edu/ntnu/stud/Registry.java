@@ -81,7 +81,7 @@ public class Registry {
     var number = departures.keySet().stream()
             .max(Comparator.comparingInt(key -> key))
             .map(num -> num + 1)
-            .orElse(1); // start at 1 if there are no departures
+            .orElse(1); // start numbering at 1 if there are no departures
     departures.put(number, departure);
     return number;
   }
@@ -132,14 +132,18 @@ public class Registry {
    * <p>Departures are in the form of a {@link Registry.Entry},
    * which contains both the departure number and the {@link Departure} itself.
    *
-   * <p>The order of the returned collection is not specified.
+   * <p>The returned collection is sorted by time and destination.
    *
    * @param time The time to filter by
    * @return All registered departures with a departure time after or at the specified time
    */
   public Entry[] afterOrAt(LocalTime time) {
+    var comparison = Comparator.comparing(
+            (Map.Entry<Integer, Departure> entry) -> entry.getValue().getTime()
+    ).thenComparing(entry -> entry.getValue().getDestination());
     var out = departureStream()
-            .filter(entry -> entry.getValue().getRealTime().isAfter(time.minusMinutes(1)));
+            .filter(entry -> entry.getValue().getRealTime().isAfter(time.minusMinutes(1)))
+            .sorted(comparison);
     return mapToEntries(out);
   }
 

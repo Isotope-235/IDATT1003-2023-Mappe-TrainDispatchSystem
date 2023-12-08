@@ -164,7 +164,7 @@ public final class Ui {
   }
 
   public String promptLine() {
-    return promptNonBlank("Enter a rail line:", "dine");
+    return promptNonBlank("Enter a rail line:", "line");
   }
 
   public String promptDestination() {
@@ -201,5 +201,9 @@ public final class Ui {
         return input;
       }
     }
+  }
+
+  public void printNoMatches() {
+    System.out.println("No matches found");
   }
 }

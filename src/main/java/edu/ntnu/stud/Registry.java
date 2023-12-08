@@ -22,7 +22,6 @@ public class Registry {
     return stream.map(Entry::fromMapPair).toArray(Entry[]::new);
   }
 
-
   /**
    * Constructs a new, empty registry.
    * If you want to populate the registry with departures, call {@link #addWithNumber(int, Departure)}
@@ -122,6 +121,23 @@ public class Registry {
   public Entry[] withDestination(String destination) {
     var out = departureStream()
             .filter(entry -> entry.getValue().getDestination().equals(destination));
+    return mapToEntries(out);
+  }
+
+  /**
+   * Gets all registered departures on the line specified.
+   *
+   * <p>Departures are in the form of a {@link Registry.Entry},
+   * which contains both the departure number and the {@link Departure} itself.
+   *
+   * <p>The order of the returned collection is not specified.
+   *
+   * @param line The line to filter by
+   * @return All registered departures on the line specified.
+   */
+  public Entry[] withLine(String line) {
+    var out = departureStream()
+            .filter(entry -> entry.getValue().getLine().equals(line));
     return mapToEntries(out);
   }
 

@@ -1,6 +1,9 @@
 package edu.ntnu.stud.commands;
 
-import edu.ntnu.stud.*;
+import edu.ntnu.stud.Command;
+import edu.ntnu.stud.CommandLog;
+import edu.ntnu.stud.Departure;
+import edu.ntnu.stud.TrainDispatchApp;
 
 import java.util.Optional;
 

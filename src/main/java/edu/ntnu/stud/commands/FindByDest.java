@@ -6,27 +6,33 @@ import edu.ntnu.stud.TrainDispatchApp;
 
 import java.util.Optional;
 
-public class Find implements Command {
+public class FindByDest implements Command {
   @Override
   public Optional<CommandLog> execute(TrainDispatchApp app) {
     var ui = app.getUserInterface();
     var reg = app.getRegistry();
 
-    var depNum = ui.promptDepartureNumber(reg.numbersInUse());
-    var dep = reg.getDeparture(depNum).get(); // ui has checked
+    var dest = ui.promptDestination();
+    var deps = reg.withDestination(dest);
 
-    ui.printDeparture(depNum, dep);
+    for (var d : deps) {
+        ui.printDeparture(d.number(), d.departure());
+    }
+
+    if (deps.length == 0) {
+        ui.printNoMatches();
+    }
 
     return Optional.empty();
   }
 
   @Override
   public String identifier() {
-    return "find";
+    return "find-dest";
   }
 
   @Override
   public String description() {
-    return "Find a departure by number";
+    return "Find departures with the given destination";
   }
 }

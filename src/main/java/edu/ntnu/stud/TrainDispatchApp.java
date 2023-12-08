@@ -28,7 +28,9 @@ public class TrainDispatchApp {
     setCommands(new Command[]{
       new ListCommands(),
       new ListDepartures(),
-      new Find(),
+      new FindByNumber(),
+      new FindByDest(),
+      new FindByLine(),
       new Add(),
       new SetTrack(),
       new SetDelay(),

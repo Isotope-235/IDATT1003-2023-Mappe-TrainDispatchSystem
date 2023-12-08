@@ -33,7 +33,7 @@ public final class Ui {
     var departures = registry.afterOrAt(time);
 
     var fields = new ArrayList<String[]>();
-    fields.add(new String[] {"Time", "Line", "Destination", "Track", "Delay"});
+    fields.add(new String[] {"Time", "Line", "Destination", "Track", "Delay", "#"});
     Arrays.stream(departures).map(entry -> {
       var dep = entry.departure();
       var delay = dep.getDelay().toString();
@@ -42,7 +42,8 @@ public final class Ui {
               dep.getLine(),
               dep.getDestination(),
               dep.getTrack().map(Object::toString).orElse(""),
-              delay.equals("00:00") ? "" : delay
+              delay.equals("00:00") ? "" : delay,
+              Integer.toString(entry.number())
       };
     }).forEach(fields::add);
 

@@ -4,6 +4,7 @@ import edu.ntnu.stud.commands.*;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * This is the main class for the train dispatch application.
@@ -36,6 +37,9 @@ public class TrainDispatchApp {
       new SetTrack(),
       new SetDelay(),
       new SetClock(),
+
+      new Undo(),
+      new Tree(),
       new Exit()
     });
 
@@ -110,5 +114,13 @@ public class TrainDispatchApp {
 
   public void setClock(LocalTime clock) {
     this.clock = clock;
+  }
+
+  public Optional<CommandLog> popCommandHistory() {
+    if (commandHistory.isEmpty()) {
+      return Optional.empty();
+    }
+    var log = commandHistory.remove(commandHistory.size() - 1);
+    return Optional.of(log);
   }
 }

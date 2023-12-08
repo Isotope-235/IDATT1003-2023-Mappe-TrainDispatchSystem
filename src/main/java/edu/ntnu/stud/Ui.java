@@ -206,4 +206,20 @@ public final class Ui {
   public void printNoMatches() {
     System.out.println("No matches found");
   }
+
+  public void printCommandLog(ArrayList<CommandLog> commandHistory) {
+    if (commandHistory.isEmpty()) {
+      System.out.println("Command history is empty");
+      return;
+    }
+    var out = new StringBuilder();
+    for (var i = 0; i < commandHistory.size(); i++) {
+      out.append((i + 1)).append(". ").append(commandHistory.get(i).display()).append("\n");
+    }
+    System.out.println(out);
+  }
+
+  public void printNoUndoFeedback() {
+    System.out.println("No commands to undo");
+  }
 }

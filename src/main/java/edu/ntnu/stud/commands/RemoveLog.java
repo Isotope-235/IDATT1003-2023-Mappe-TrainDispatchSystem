@@ -15,4 +15,9 @@ public class RemoveLog implements CommandLog {
   public void undo(TrainDispatchApp app) {
     app.getRegistry().addWithNumber(entry.number(), entry.departure());
   }
+
+  @Override
+  public String display() {
+      return "removed departure " + entry.number();
+  }
 }

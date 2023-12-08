@@ -20,4 +20,9 @@ public class SetDelayLog implements CommandLog {
     // assuming the order of undos is correct...
     departure.setDelay(previousDelay);
   }
+
+  @Override
+  public String display() {
+      return "set delay of departure " + departure;
+  }
 }

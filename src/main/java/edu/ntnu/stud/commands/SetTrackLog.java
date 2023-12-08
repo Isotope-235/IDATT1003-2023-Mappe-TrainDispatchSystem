@@ -24,4 +24,9 @@ public class SetTrackLog implements CommandLog {
     try { departure.setTrack(previousTrack); }
     catch (IllegalArgumentException e) { departure.resetTrack(); }
   }
+
+  @Override
+  public String display() {
+      return "set track of departure " + departure;
+  }
 }

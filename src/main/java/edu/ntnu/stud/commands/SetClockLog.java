@@ -16,4 +16,9 @@ public class SetClockLog implements CommandLog {
   public void undo(TrainDispatchApp app) {
     app.setClock(prev);
   }
+
+  @Override
+  public String display() {
+      return "set clock";
+  }
 }

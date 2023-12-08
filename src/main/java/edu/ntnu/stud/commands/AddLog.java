@@ -14,4 +14,9 @@ public class AddLog implements CommandLog {
   public void undo(TrainDispatchApp app) {
     app.getRegistry().remove(departure);
   }
+
+  @Override
+  public String display() {
+      return "added departure " + departure;
+  }
 }

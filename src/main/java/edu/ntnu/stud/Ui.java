@@ -37,8 +37,9 @@ public final class Ui {
     Arrays.stream(departures).map(entry -> {
       var dep = entry.departure();
       var delay = dep.getDelay().toString();
+      var noDelay = delay.equals("00:00");
       return new String[] {
-              dep.getTime().toString(),
+              dep.getTime().toString() + (noDelay ? "" : " (" + dep.getRealTime() + ")" ),
               dep.getLine(),
               dep.getDestination(),
               dep.getTrack().map(Object::toString).orElse(""),

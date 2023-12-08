@@ -30,6 +30,7 @@ public class TrainDispatchApp {
       new ListDepartures(),
       new Add(),
       new SetTrack(),
+      new SetDelay(),
       new Exit()
     });
 

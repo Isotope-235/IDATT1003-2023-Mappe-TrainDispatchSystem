@@ -32,8 +32,10 @@ public class TrainDispatchApp {
       new FindByDest(),
       new FindByLine(),
       new Add(),
+      new Remove(),
       new SetTrack(),
       new SetDelay(),
+      new SetClock(),
       new Exit()
     });
 

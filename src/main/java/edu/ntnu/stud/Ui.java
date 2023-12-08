@@ -29,6 +29,18 @@ public final class Ui {
     }
   }
 
+  public void printDeparture(int number, Departure departure) {
+    var track = departure.getTrack();
+    var delay = departure.getDelay().toString();
+    System.out.println("\nDeparture " + number + ":" +
+      "\n\tTime: " + departure.getTime() +
+      "\n\tLine: " + departure.getLine() +
+      "\n\tDestination: " + departure.getDestination() +
+      "\n\t" + (track.map(integer -> "Track: " + integer).orElse("No track set")) +
+      "\n\t" + (delay.equals("00:00") ? "No delay" : "Delay: " + delay)
+    );
+  }
+
   public void printDepartureList(Registry registry, LocalTime time) {
     var departures = registry.afterOrAt(time);
 
